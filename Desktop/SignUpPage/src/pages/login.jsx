@@ -5,11 +5,14 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setMessage(null); 
+    setLoading(true); 
+    setMessage("Logging in...");
 
     try {
       const res = await fetch("http://localhost:8080/auth/login", {
@@ -28,6 +31,8 @@ function Login() {
     } catch (err) {
       setMessage("Error connecting to server.");
       console.error(err);
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -61,7 +66,9 @@ function Login() {
   />
 
   <div className="form-actions">
-    <button type="submit">Log In</button>
+    <button type="submit" disabled={loading}> 
+    {loading ? "Logging In..." : "Log In"} 
+    </button>
 
     <div className="or">
       <p>OR</p>

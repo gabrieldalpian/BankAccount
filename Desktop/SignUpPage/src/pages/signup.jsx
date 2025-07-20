@@ -6,6 +6,7 @@ function SignUp() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,6 +19,8 @@ function SignUp() {
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     console.log("Submit triggered");
+    setLoading(true);
+    setMessage("Creating Account...");
 
     try {
       const res = await fetch("http://localhost:8080/auth/register", {
@@ -36,6 +39,8 @@ function SignUp() {
     } catch (err) {
       setMessage("Server error.");
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -95,7 +100,9 @@ function SignUp() {
 
         <p className="forgot-password" onClick={() => navigate("/login")}>Already have an account?</p>
 
-        <button type="submit">Create Account</button>
+        <button type="submit" disabled={loading}> 
+        {loading ? "Creating Account..." : "Create Account"}
+        </button>
       </form>
     </>
   );
