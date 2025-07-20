@@ -99,6 +99,7 @@ function SignUp() {
         />
 
         <p className="forgot-password" onClick={() => navigate("/login")}>Already have an account?</p>
+
         <button type="submit" disabled={loading}>
           {loading ? "Creating Account..." : "Create Account"}
         </button>
