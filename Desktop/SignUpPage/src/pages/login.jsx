@@ -5,14 +5,14 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    setMessage("Logging in...");
-    await new Promise((r) => setTimeout(r, 0));
+
     setLoading(true);
+    setMessage("Logging in...");
 
     try {
       const res = await fetch("http://localhost:8080/auth/login", {
@@ -32,7 +32,7 @@ function Login() {
       setMessage("Error connecting to server.");
       console.error(err);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -47,58 +47,58 @@ function Login() {
       </div>
 
       <form id="info" onSubmit={handleLoginSubmit}>
-  <p>Email</p>
-  <input
-    type="text"
-    placeholder="Email Address"
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-    required
-  />
+        <p>Email</p>
+        <input
+          type="text"
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-  <p>Your Password</p>
-  <input
-    type="password"
-    placeholder="Password"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-    required
-  />
+        <p>Your Password</p>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-  <div className="form-actions">
-    <button type="submit" disabled={loading}> 
-    {loading ? "Logging In..." : "Log In"} 
-    </button>
+        <div className="form-actions">
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging In..." : "Log In"}
+          </button>
 
-    <div className="or">
-      <p>OR</p>
-    </div>
+          <div className="or">
+            <p>OR</p>
+          </div>
 
-    <button type="button" onClick={() => navigate("/signup")}>
-      Sign Up
-    </button>
-  </div>
-</form>
+          <button type="button" onClick={() => navigate("/signup")}>
+            Sign Up
+          </button>
+        </div>
+      </form>
 
-  {message && (
-  <p
-    style={{
-      position: "fixed",
-      top: "10px",
-      right: "10px",
-      backgroundColor: message.includes("successful") ? "#4caf50" : "#f44336",
-      color: "white",
-      padding: "10px 20px",
-      borderRadius: "5px",
-      fontWeight: "bold",
-      boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-      zIndex: 1000,
-    }}
-    role="alert">
-    {message}
-  </p>
-)}
-
+      {message && (
+        <p
+          style={{
+            position: "fixed",
+            top: "10px",
+            right: "10px",
+            backgroundColor: message.includes("successful") ? "#4caf50" : "#f44336",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+            zIndex: 1000,
+          }}
+          role="alert"
+        >
+          {message}
+        </p>
+      )}
     </>
   );
 }

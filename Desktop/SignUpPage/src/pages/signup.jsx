@@ -18,8 +18,8 @@ function SignUp() {
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submit triggered");
-    setLoading(true); 
+
+    setLoading(true);
     setMessage("Creating Account...");
 
     try {
@@ -28,10 +28,10 @@ function SignUp() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, name, password }),
       });
+
       if (res.ok) {
         const data = await res.json();
         setMessage("Account created!");
-        console.log(data);
         setTimeout(() => navigate("/"), 1000);
       } else {
         setMessage("Email already registered.");
@@ -40,7 +40,7 @@ function SignUp() {
       setMessage("Server error.");
       console.error(err);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -80,6 +80,7 @@ function SignUp() {
           placeholder="Full Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
 
         <p>Email</p>
@@ -88,6 +89,7 @@ function SignUp() {
           placeholder="Email Address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
         <p>Your Password</p>
@@ -96,6 +98,7 @@ function SignUp() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
         <p className="forgot-password" onClick={() => navigate("/login")}>Already have an account?</p>
