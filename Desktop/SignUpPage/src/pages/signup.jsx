@@ -6,7 +6,7 @@ function SignUp() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function SignUp() {
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     console.log("Submit triggered");
-    setLoading(true);
+    setLoading(true); 
     setMessage("Creating Account...");
 
     try {
@@ -40,7 +40,7 @@ function SignUp() {
       setMessage("Server error.");
       console.error(err);
     } finally {
-      setLoading(false);
+      setLoading(false); 
     }
   };
 
@@ -99,9 +99,8 @@ function SignUp() {
         />
 
         <p className="forgot-password" onClick={() => navigate("/login")}>Already have an account?</p>
-
-        <button type="submit" disabled={loading}> 
-        {loading ? "Creating Account..." : "Create Account"}
+        <button type="submit" disabled={loading}>
+          {loading ? "Creating Account..." : "Create Account"}
         </button>
       </form>
     </>

@@ -10,9 +10,9 @@ function Login() {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    setMessage(null); 
-    setLoading(true); 
     setMessage("Logging in...");
+    await new Promise((r) => setTimeout(r, 0));
+    setLoading(true);
 
     try {
       const res = await fetch("http://localhost:8080/auth/login", {
