@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/account")
-@CrossOrigin(origins = {
-        "https://banking-at-gabriels.vercel.app",
-        "https://<your-service-name>.koyeb.app"
-})
+@CrossOrigin(origins = "https://banking-at-gabriels.vercel.app")
 public class AccountController {
 
     @Autowired
